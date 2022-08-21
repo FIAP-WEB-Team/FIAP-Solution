@@ -13,9 +13,9 @@
 				value="oracle.jdbc.OracleDriver" />
 			<property name="hibernate.connection.url"
 				value="jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl" />
-			<property name="hibernate.connection.user" value="346790" />
+			<property name="hibernate.connection.user" value="RM346747" />
 			<property name="hibernate.connection.password"
-				value="160495" />
+				value="011297" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 		</properties>
