@@ -2,7 +2,6 @@ package sql_connection;
 
 import jakarta.persistence.*;
 import model.PersonModel;
-import repository.PersonRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,13 +11,15 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
+import dao.PersonDAO;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PersonCRUD {
 
 	private static EntityManager em = null;
 	List<PersonModel> listPerson;
 	static int idlocal;
-	PersonRepository person = new PersonRepository(em);
+	PersonDAO person = new PersonDAO(em);
 	public int ident;
 
 	@BeforeAll
@@ -70,7 +71,7 @@ public class PersonCRUD {
 	@Test
 	@Order(2)
 	void getPerson() {
-		PersonRepository person = new PersonRepository(em);
+		PersonDAO person = new PersonDAO(em);
 		var entity = person.getEntity(idlocal);
 		var cep = entity.getCep();
 		var email = entity.getEmail();
@@ -95,7 +96,7 @@ public class PersonCRUD {
 		person1.setTelephone("21 98115-2022");
 		person1.setNationality("Brasileiro");
 
-		PersonRepository person = new PersonRepository(em);
+		PersonDAO person = new PersonDAO(em);
 		person.update(idlocal, person1);
 
 	}
@@ -103,7 +104,7 @@ public class PersonCRUD {
 	@Test
 	@Order(4)
 	void deletePerson() {
-		PersonRepository person = new PersonRepository(em);
+		PersonDAO person = new PersonDAO(em);
 		assertDoesNotThrow(() -> person.deleteEntity(idlocal));
 
 	}

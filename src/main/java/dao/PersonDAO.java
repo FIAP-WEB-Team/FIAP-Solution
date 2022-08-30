@@ -1,11 +1,10 @@
-package repository;
+package dao;
 
-import dao.GenericDAO;
 import jakarta.persistence.EntityManager;
 import model.PersonModel;
 
-public class PersonRepository extends GenericDAO<PersonModel, Integer> {
-	public PersonRepository(EntityManager em) {
+public class PersonDAO extends GenericDAO<PersonModel, Integer> {
+	public PersonDAO(EntityManager em) {
 		super(em);
 	}
 
