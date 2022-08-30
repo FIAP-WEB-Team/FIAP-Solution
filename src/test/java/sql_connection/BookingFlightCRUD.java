@@ -8,14 +8,17 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import model.BookingFlight;
 import dao.BookingFlightDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BookingFlightCRUD {
 	private static EntityManager em = null;
 	private static BookingFlightDAO bookingFlightDao;
@@ -52,14 +55,20 @@ public class BookingFlightCRUD {
 			em.getTransaction().commit();
 	}
 
+	@Test
+	@Order(1)
 	public void createBookingFlight() {
 		assertDoesNotThrow(() -> bookingFlightDao.save(bookingFlight));
 	}
 
+	@Test
+	@Order(2)
 	public void selectBookingFlight() {
 		assertEquals(bookingFlightDao.getEntity(bookingFlight.getId()).toString(), bookingFlight.toString());
 	}
 
+	@Test
+	@Order(3)
 	public void updateBookingFlight() {
 		var bookingFlight_2 = new BookingFlight("Origem", "Destino", 12, "Latam");
 		assertDoesNotThrow(() -> bookingFlightDao.update(bookingFlight.getId(), bookingFlight_2));
@@ -67,6 +76,8 @@ public class BookingFlightCRUD {
 		selectBookingFlight();
 	}
 
+	@Test
+	@Order(4)
 	public void deleteBookingFlight() {
 		assertDoesNotThrow(() -> bookingFlightDao.deleteEntity(bookingFlight.getId()));
 	}

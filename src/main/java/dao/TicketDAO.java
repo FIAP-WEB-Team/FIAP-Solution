@@ -9,7 +9,7 @@ public class TicketDAO extends GenericDAO<Ticket, Integer> {
 		super(manager);
 	}
 
-	@Override
+
 	public void update(Integer key, Ticket entity) {
 		var oldEntity = this.getEntity(key);
 		

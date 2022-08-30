@@ -9,7 +9,6 @@ public class BookingFlightDAO extends GenericDAO<BookingFlight, Integer> {
 		super(em);
 	}
 	
-	@Override
 	public void update(Integer key, BookingFlight entity) {
 		var currentEntity = this.getEntity(key);
 		currentEntity.setOrigin(entity.getOrigin());

@@ -9,7 +9,7 @@ public class PaymentDAO extends GenericDAO<Payment, Integer> {
 		super(manager);
 	}
 	
-	@Override
+
 	public void update(Integer key, Payment entity) {
 		var oldEntity = this.getEntity(key);
 		oldEntity.setName(entity.getName());

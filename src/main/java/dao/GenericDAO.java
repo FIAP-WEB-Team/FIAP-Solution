@@ -34,9 +34,5 @@ public class GenericDAO<E, K> {
 					"Key " + key + " does not exist within entity class " + this.entity.getSimpleName());
 	}
 
-	public void update(K key, E entity) {
-		this.deleteEntity(key);
-		this.save(entity);
-	}
 
 }

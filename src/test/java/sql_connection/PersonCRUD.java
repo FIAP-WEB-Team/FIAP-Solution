@@ -1,7 +1,7 @@
 package sql_connection;
 
 import jakarta.persistence.*;
-
+import model.PersonModel;
 import repository.PersonRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,8 +11,6 @@ import java.sql.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.*;
-
-import Models.PersonModel;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PersonCRUD {
@@ -35,14 +33,14 @@ public class PersonCRUD {
 
 	@BeforeEach
 	public void beginTransaction() {
-		
+
 		em.getTransaction().begin();
 	}
 
 	@AfterAll
 	public static void closeConnections() {
 		if (em != null)
-		em.close();
+			em.close();
 	}
 
 	@AfterEach
@@ -65,7 +63,7 @@ public class PersonCRUD {
 		person1.setTelephone("21 98115-2022");
 		person1.setNationality("Brasileiro");
 		assertDoesNotThrow(() -> person.save(person1));
-		 idlocal = person1.getPersonID();
+		idlocal = person1.getPersonID();
 
 	}
 
@@ -73,9 +71,15 @@ public class PersonCRUD {
 	@Order(2)
 	void getPerson() {
 		PersonRepository person = new PersonRepository(em);
-		var t = person.getEntity(idlocal);
-        
+		var entity = person.getEntity(idlocal);
+		var cep = entity.getCep();
+		var email = entity.getEmail();
+
+		assertEquals(cep, "81058-820");
+		assertEquals(email, "Giba@gmail.com");
+
 	}
+
 	@Test
 	@Order(3)
 	void UpdatePerson() {
@@ -90,19 +94,18 @@ public class PersonCRUD {
 		person1.setCep("81058-820");
 		person1.setTelephone("21 98115-2022");
 		person1.setNationality("Brasileiro");
-		
+
 		PersonRepository person = new PersonRepository(em);
 		person.update(idlocal, person1);
 
 	}
+
 	@Test
 	@Order(4)
 	void deletePerson() {
 		PersonRepository person = new PersonRepository(em);
-		assertDoesNotThrow(() ->person.deleteEntity(idlocal-1));
+		assertDoesNotThrow(() -> person.deleteEntity(idlocal));
 
 	}
-
-
 
 }
